@@ -61,6 +61,8 @@ public class MainMenu extends JPanel {
 
         gbc.gridy = 4;
         homeButton = new JButton("CALENDARIO");
+        homeButton.setActionCommand("calendarGUI");
+        homeButton.addActionListener(listener);
         add(homeButton,gbc);
 
         gbc.gridy = 5;

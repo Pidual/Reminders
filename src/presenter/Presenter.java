@@ -45,7 +45,13 @@ public class Presenter implements ActionListener {
             case "createNewGoal":
             System.out.println("SSSSSS221323213 ");
 
+            case "calendarGUI":
+                view.showCalendarPanel();
             break;
+            case "addReminder":
+                calendar.addReminder(view.getReminder();
+                break;
+
             default:
 
                 break;

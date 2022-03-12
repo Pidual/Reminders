@@ -1,5 +1,7 @@
 package views;
 
+import models.Reminder;
+
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -43,4 +45,12 @@ public class GraphicalUserInterface extends JFrame{
         cardPanes.showRemoverPanel();
     }
 
+    public void showCalendarPanel() {
+        cardPanes.showCalendarPanel();
+    }
+
+    public Reminder getReminder() {
+        NewGoalPanel ngp = cardPanes.getNgp();
+        new Reminder(ngp.get);
+    }
 }

@@ -22,7 +22,7 @@ public class Calendar {
         reminderMatrix = new Reminder[7][24];
     }
 
-    public void addReminder(int day, int hour , Reminder reminder){
+    public void addReminder(LocalDate day, LocalTime hour , Reminder reminder){
             reminderMatrix[day][hour] = reminder;
     }
 

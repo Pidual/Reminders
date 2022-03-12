@@ -27,7 +27,7 @@ public class Cards extends JPanel{
         add(cp,"CalendarPanel");
         add(ngp,"NewPanel");
         add(rp,"RemoverPanel");
-        cardLayout.show(this, "NewPanel");
+        cardLayout.show(this, "CalendarPanel");
     }
 
     public void showNewGoalPanel(){
@@ -43,4 +43,7 @@ public class Cards extends JPanel{
     }
 
 
+    public NewGoalPanel getNgp() {
+        return ngp;
+    }
 }

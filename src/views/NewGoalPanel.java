@@ -85,6 +85,7 @@ public class NewGoalPanel extends JPanel {
         gbc.gridx = 2;
         gbc.gridheight=4;
         submitButton = new JButton("<html>AGREGAR<br/>RECORDATORIO</html> "); //Submit button
+        submitButton.setActionCommand("AddReminder");
         submitButton.setPreferredSize(new Dimension(200, 142));
         styleButton(submitButton);
         add(submitButton, gbc);

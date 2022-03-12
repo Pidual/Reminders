@@ -16,9 +16,4 @@ public class RemoverPanel extends JPanel{
         button = new JButton("Hola");
         add(button);
     }
-
-    public void paint(Graphics g){
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.drawLine(29, 35, 55, 52);
-    }
 }
