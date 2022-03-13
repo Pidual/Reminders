@@ -5,6 +5,7 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -86,6 +87,7 @@ public class NewGoalPanel extends JPanel {
         gbc.gridheight=4;
         submitButton = new JButton("<html>AGREGAR<br/>RECORDATORIO</html> "); //Submit button
         submitButton.setActionCommand("AddReminder");
+        submitButton.addActionListener(listener);
         submitButton.setPreferredSize(new Dimension(200, 142));
         styleButton(submitButton);
         add(submitButton, gbc);
@@ -172,6 +174,18 @@ public class NewGoalPanel extends JPanel {
         submitButton.setBackground(new Color(0, 45, 89));
         submitButton.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.WHITE
         ));
+    }
+
+    public ArrayList<Object> getInfoInAnArray(){
+        ArrayList<Object> information = new ArrayList<Object>();
+        information.add(subject.getText());
+        information.add(descripton.getText());
+        information.add(startDate.getDate());
+        information.add(endDate.getDate());
+        information.add(startTime.getValue());
+        information.add(endTime.getValue());
+        //informatio.add(PRIORITY) //TODO
+        return information;
     }
 
 

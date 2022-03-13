@@ -1,14 +1,15 @@
 package models;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 
 
 public class Calendar {
 
-    private Reminder[][] reminderMatrix;
+    private ArrayList<Reminder> reminders;
     private LocalTime currentTime;
     private LocalDate currentDate;
     private GUIConfigurations configs;
@@ -16,32 +17,31 @@ public class Calendar {
 
     public Calendar(){
         currentDate = LocalDate.now();
+        reminders = new ArrayList<Reminder>();
     }
 
     public void startReminderMatrix() {
-        reminderMatrix = new Reminder[7][24];
+
     }
 
-    public void addReminder(LocalDate day, LocalTime hour , Reminder reminder){
-            reminderMatrix[day][hour] = reminder;
+    public void addReminder(ArrayList<Object> info){
+        Reminder newReminder = new Reminder(info.get(0).toString(), dateToLocalDate((Date) info.get(1)) , dateToLocalDate((Date) info.get(2)), toLocalTime((Date) info.get(3)) , toLocalTime((Date) info.get(4))) ;
+
+        reminders.add(newReminder);
     }
 
-    public void removeReminder(int day,int hour){
-        reminderMatrix[day][hour] = null;
+    private LocalDate dateToLocalDate(Date date){
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
-    public Reminder[][] generateNextWeekMatrix(){
-        //Todo
-        return null;
+    private LocalTime toLocalTime(Date date){
+        java.time.Instant inst = date.toInstant();
+        java.time.ZoneId theZone = java.time.ZoneId.systemDefault();
+        java.time.LocalTime thetime = java.time.LocalTime.ofInstant(inst, theZone);
+        return thetime;
     }
 
-    public Reminder[][] generatePreviusWeekMatrix(){
-        //Todo
-        return null;
-    }
-
-    public Reminder[][] generateSpecificWeekMatrix(){
-        //TODO
-        return null;
+    public ArrayList<Reminder> getReminders() {
+        return reminders;
     }
 }

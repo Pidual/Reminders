@@ -1,0 +1,12 @@
+[
+  {
+    "subject": "PRIMER RECORDATORIO",
+    "startDate": "2022-03-13",
+    "endDate": "2022-03-17",
+    "startTime": "09:20:03.343",
+    "endTime": "18:30:00",
+    "priority": 0,
+    "goalID": 0,
+    "completed": false
+  }
+]

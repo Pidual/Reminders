@@ -1,12 +1,10 @@
 package views;
 
-import models.Reminder;
-
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionListener;
-import java.util.Date;
+import java.util.ArrayList;
 
 /**
  * Se crea la vista
@@ -49,8 +47,8 @@ public class GraphicalUserInterface extends JFrame{
         cardPanes.showCalendarPanel();
     }
 
-    public Reminder getReminder() {
-        NewGoalPanel ngp = cardPanes.getNgp();
-        new Reminder(ngp.get);
+
+    public ArrayList<Object> getInfo() {
+        return cardPanes.getNgp().getInfoInAnArray();
     }
 }

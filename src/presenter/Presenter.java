@@ -1,5 +1,6 @@
 package presenter;
 
+import Persistence.FileOperation;
 import models.Calendar;
 
 import views.GraphicalUserInterface;
@@ -10,10 +11,12 @@ public class Presenter implements ActionListener {
 
     private Calendar calendar;
     private GraphicalUserInterface view;
+    private FileOperation fileOperation;
 
     public Presenter() {
         calendar = new Calendar();
         view = new GraphicalUserInterface(this);
+        fileOperation = new FileOperation("data/Reminders_Data2.json");
     }
 
     @Override
@@ -21,7 +24,6 @@ public class Presenter implements ActionListener {
         String command = event.getActionCommand();
         switch (command) {
             case "openNewGoalPanel":
-            System.out.println("Nueva meta acccccc");
             view.showNewGoalPanel();
             break;
 
@@ -42,20 +44,25 @@ public class Presenter implements ActionListener {
             System.out.println("EXEXE");
             break;
 
-            case "createNewGoal":
-            System.out.println("SSSSSS221323213 ");
-
             case "calendarGUI":
                 view.showCalendarPanel();
             break;
-            case "addReminder":
-                calendar.addReminder(view.getReminder();
+
+            case "AddReminder":
+                calendar.addReminder(view.getInfo());
+                save();
                 break;
 
             default:
 
                 break;
         }
+    }
+
+    private void save() {
+        fileOperation.save(calendar.getReminders());
+
+
     }
 
 }
