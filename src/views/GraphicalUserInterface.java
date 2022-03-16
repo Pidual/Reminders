@@ -1,5 +1,8 @@
 package views;
 
+import models.Reminder;
+import presenter.Presenter;
+
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,9 +19,9 @@ public class GraphicalUserInterface extends JFrame{
 
     
     public GraphicalUserInterface(ActionListener listener) {
-        super("Goal Tracker Calendario");  
+        super("Reminders :)");
         initComponents(listener);
-        this.setSize(1000, 700);
+        this.setSize(1200, 700);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -27,28 +30,17 @@ public class GraphicalUserInterface extends JFrame{
     private void initComponents(ActionListener listener){
         this.setLayout(new BorderLayout());
         mainMenu = new MainMenu(listener); //Iniciamos el panel del menu
-        mainMenu.setBackground(new Color(0, 45, 89)); //Color del menu principal
         mainMenu.setPreferredSize(mainMenu.getPreferredSize());
         add(mainMenu, BorderLayout.WEST);
-
         cardPanes = new Cards(listener);
         add(cardPanes, BorderLayout.CENTER);
     }
 
-    public void showNewGoalPanel(){
-        cardPanes.showNewGoalPanel();
-    }
-
-    public void showRemoveGoalPanel(){
-        cardPanes.showRemoverPanel();
-    }
-
-    public void showCalendarPanel() {
-        cardPanes.showCalendarPanel();
-    }
-
-
     public ArrayList<Object> getInfo() {
-        return cardPanes.getNgp().getInfoInAnArray();
+        return cardPanes.getNewGoalPanel().getInfoInAnArray();
+    }
+
+    public Cards getCardsPanel() {
+        return cardPanes;
     }
 }

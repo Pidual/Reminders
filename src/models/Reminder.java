@@ -11,11 +11,9 @@ public class Reminder {
     private LocalTime startTime; //Obligatory
     private LocalTime endTime; //Obligatory
     private int priority; //Optional
-    private int goalID; // Mine
     private boolean completed; //Mine
 
-    public Reminder(){
-
+    public Reminder() { //Util para crear objetos con gson
     }
 
     public Reminder(String subject, String description, LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime, int priority) {
@@ -28,44 +26,17 @@ public class Reminder {
         this.priority = priority;
     }
 
-    public Reminder(String subject, LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
-        this.subject = subject;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Reminder{" +
-                "subject='" + subject + '\'' +
-                ", description='" + description + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                ", priority=" + priority +
-                ", goalID=" + goalID +
-                ", completed=" + completed +
-                '}';
-    }
 
     public String getSubject() {
         return subject;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
+
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public LocalDate getStartDate() {
         return startDate;
@@ -105,14 +76,6 @@ public class Reminder {
 
     public void setPriority(int priority) {
         this.priority = priority;
-    }
-
-    public int getGoalID() {
-        return goalID;
-    }
-
-    public void setGoalID(int goalID) {
-        this.goalID = goalID;
     }
 
     public boolean isCompleted() {

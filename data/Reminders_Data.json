@@ -1,0 +1,32 @@
+[
+  {
+    "subject": "Primer meta",
+    "description": "Hacer ejercicio",
+    "startDate": "2022-03-15",
+    "endDate": "2022-03-17",
+    "startTime": "20:58:27.099",
+    "endTime": "18:58:00",
+    "priority": 1,
+    "completed": false
+  },
+  {
+    "subject": "Hacer el almuerzo",
+    "description": "Hacer arroz con pollo",
+    "startDate": "2022-03-15",
+    "endDate": "2022-03-17",
+    "startTime": "20:58:27.099",
+    "endTime": "18:58:00",
+    "priority": 2,
+    "completed": false
+  },
+  {
+    "subject": "Comer bien",
+    "description": "",
+    "startDate": "2022-03-15",
+    "endDate": "2024-03-29",
+    "startTime": "17:01:00",
+    "endTime": "21:01:42.574",
+    "priority": 1,
+    "completed": false
+  }
+]

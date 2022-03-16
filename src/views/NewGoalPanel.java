@@ -28,12 +28,12 @@ public class NewGoalPanel extends JPanel {
     private JTextArea descripton;
     private JSeparator separator;
     private JSeparator separatorTwo;
-    private JRadioButton lowPrio;
-    private JRadioButton mediumPrio;
-    private JRadioButton highPrio;
-    private JRadioButton nuclearTreahtPrio;
     private JButton submitButton;
     private Date actualDate;
+    private JToggleButton lowPrio;
+    private JToggleButton mediumPrio;
+    private JToggleButton highPrio;
+    private ButtonGroup priorityGroup;
 
     public NewGoalPanel(ActionListener listener) {
         actualDate = new Date();
@@ -44,13 +44,10 @@ public class NewGoalPanel extends JPanel {
     private void initComponents(ActionListener listener) {
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-
-
         this.setBackground(new Color(152, 185, 171));
-
+        priorityGroup = new ButtonGroup();
         gbc.anchor = GridBagConstraints.NORTHWEST;
-        gbc.insets = new Insets(0, 60, 0, 0);
-
+        gbc.insets = new Insets(0, 30, 7, 0);
         gbc.gridy = 0;
         subjectLabel = new JLabel("Recordatorio:");//Label
         styleComponent(subjectLabel);
@@ -65,35 +62,33 @@ public class NewGoalPanel extends JPanel {
         add(subject, gbc);
         gbc.gridwidth = 1;
 
-        gbc.gridy = 2;
-        separator = new JSeparator();
-        separator.setPreferredSize(new Dimension(1, 70));
-        add(separator, gbc);
 
-        gbc.gridy = 3;
+        gbc.gridy = 2;
         gbc.gridx = 0;
         startTimeLabel = new JLabel("Inicia a las:");
         styleComponent(startTimeLabel);
         add(startTimeLabel, gbc);
 
-        gbc.gridy = 3;
+        gbc.gridy = 2;
         gbc.gridx = 1;
         endTimeLabel = new JLabel("Termina a las:");
         styleComponent(endTimeLabel);
         add(endTimeLabel, gbc);
 
-        gbc.gridy = 3;
+
+        gbc.gridy = 2;
         gbc.gridx = 2;
-        gbc.gridheight=4;
+        gbc.gridheight = 4;
         submitButton = new JButton("<html>AGREGAR<br/>RECORDATORIO</html> "); //Submit button
         submitButton.setActionCommand("AddReminder");
+        submitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         submitButton.addActionListener(listener);
-        submitButton.setPreferredSize(new Dimension(200, 142));
+        submitButton.setPreferredSize(new Dimension(200, 180));
         styleButton(submitButton);
         add(submitButton, gbc);
-        gbc.gridheight=1;
+        gbc.gridheight = 1;
 
-        gbc.gridy = 4;
+        gbc.gridy = 3;
         gbc.gridx = 0;
         startTime = new JSpinner(new SpinnerDateModel());
         startTime.setEditor(new JSpinner.DateEditor(startTime, "HH:mm"));
@@ -101,7 +96,7 @@ public class NewGoalPanel extends JPanel {
         styleComponent(startTime);
         add(startTime, gbc);
 
-        gbc.gridy = 4;
+        gbc.gridy = 3;
         gbc.gridx = 1;
         endTime = new JSpinner(new SpinnerDateModel());
         endTime.setEditor(new JSpinner.DateEditor(endTime, "HH:mm"));
@@ -109,20 +104,20 @@ public class NewGoalPanel extends JPanel {
         styleComponent(endTime);
         add(endTime, gbc);
 
-        gbc.gridy = 5;
+        gbc.gridy = 4;
         gbc.gridx = 0;
         startDateLabel = new JLabel("Fecha inicial:");
         styleComponent(startDateLabel);
         add(startDateLabel, gbc);
 
 
-        gbc.gridy = 5;
+        gbc.gridy = 4;
         gbc.gridx = 1;
         endDateLabel = new JLabel("Fecha Final:");
         styleComponent(endDateLabel);
         add(endDateLabel, gbc);
 
-        gbc.gridy = 6;
+        gbc.gridy = 5;
         gbc.gridx = 0;
         startDate = new JDateChooser();
         startDate.setPreferredSize(new Dimension(170, 40));
@@ -131,7 +126,7 @@ public class NewGoalPanel extends JPanel {
         styleComponent(startDate);
         add(startDate, gbc);
 
-        gbc.gridy = 6;
+        gbc.gridy = 5;
         gbc.gridx = 1;
         endDate = new JDateChooser();
         endDate.setPreferredSize(new Dimension(170, 40));
@@ -140,10 +135,34 @@ public class NewGoalPanel extends JPanel {
         styleComponent(endDate);
         add(endDate, gbc);
 
-        gbc.gridy = 7;
+        gbc.gridy = 6;
         separatorTwo = new JSeparator();
-        separatorTwo.setPreferredSize(new Dimension(1, 30));
+        separatorTwo.setPreferredSize(new Dimension(1, 20));
         add(separatorTwo, gbc);
+
+        gbc.gridy = 7;
+        gbc.gridx = 0;
+        lowPrio = new JToggleButton("Baja Prioridad");
+        lowPrio.setActionCommand("1");
+        lowPrio.setSelected(true);
+        priorityGroup.add(lowPrio);
+        styleComponent(lowPrio);
+        add(lowPrio, gbc);
+
+        gbc.gridy = 7;
+        gbc.gridx = 1;
+        mediumPrio = new JToggleButton("Media Prioridad");
+        mediumPrio.setActionCommand("2");
+        priorityGroup.add(mediumPrio);
+        styleComponent(mediumPrio);
+        add(mediumPrio, gbc);
+
+        gbc.gridx = 2;
+        highPrio = new JToggleButton("Alta Prioridad");
+        highPrio.setActionCommand("3");
+        priorityGroup.add(highPrio);
+        styleComponent(highPrio);
+        add(highPrio, gbc);
 
         gbc.gridy = 8;
         gbc.gridx = 0;
@@ -168,7 +187,7 @@ public class NewGoalPanel extends JPanel {
         component.setOpaque(false);
     }
 
-    private void styleButton(JButton button){
+    private void styleButton(JButton button) {
         submitButton.setFont(new Font("Helvetica", Font.PLAIN, 20));
         submitButton.setForeground(Color.WHITE);
         submitButton.setBackground(new Color(0, 45, 89));
@@ -176,7 +195,7 @@ public class NewGoalPanel extends JPanel {
         ));
     }
 
-    public ArrayList<Object> getInfoInAnArray(){
+    public ArrayList<Object> getInfoInAnArray() {
         ArrayList<Object> information = new ArrayList<Object>();
         information.add(subject.getText());
         information.add(descripton.getText());
@@ -184,9 +203,8 @@ public class NewGoalPanel extends JPanel {
         information.add(endDate.getDate());
         information.add(startTime.getValue());
         information.add(endTime.getValue());
-        //informatio.add(PRIORITY) //TODO
+        information.add(Integer.parseInt(priorityGroup.getSelection().getActionCommand()));
         return information;
     }
-
 
 }

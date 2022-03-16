@@ -1,17 +1,19 @@
 package views;
 
+import models.Reminder;
+
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.Date;
+import java.util.ArrayList;
 
 public class Cards extends JPanel{
     
-    private CalendarPanel cp;
-    private NewGoalPanel ngp;
-    private RemoverPanel rp;
+    private TablePanel tablePanel;
+    private NewGoalPanel newGoalPanel;
+    private ConfigPanel configPanel;
     private CardLayout cardLayout;
-    
+
     public Cards(ActionListener listener){
         initComponents(listener);
     }
@@ -19,31 +21,31 @@ public class Cards extends JPanel{
     public void initComponents(ActionListener listener){
         this.setSize(1000,600);
         this.setLayout(cardLayout = new CardLayout()); //Card Layout
-        cp = new CalendarPanel(null); //Listeners bla
-        cp.setBackground(Color.DARK_GRAY);
-        ngp = new NewGoalPanel(listener);
-        rp = new RemoverPanel();
-        rp.setBackground(Color.PINK);
-        add(cp,"CalendarPanel");
-        add(ngp,"NewPanel");
-        add(rp,"RemoverPanel");
-        cardLayout.show(this, "CalendarPanel");
+        tablePanel = new TablePanel();
+        newGoalPanel = new NewGoalPanel(listener);
+        configPanel = new ConfigPanel(listener);
+        add(configPanel,"ConfigPanel");
+        add(tablePanel,"TablePanel");
+        add(newGoalPanel,"NewPanel");
+        cardLayout.show(this, "NewPanel");
     }
 
     public void showNewGoalPanel(){
         cardLayout.show(this, "NewPanel");
     }
-
-    public void showCalendarPanel(){
-        cardLayout.show(this, "CalendarPanel");
+    public void showTablePanel(){
+        cardLayout.show(this, "TablePanel");
+    }
+    public void showConfigPanel(){
+        cardLayout.show(this, "ConfigPanel");
     }
 
-    public void showRemoverPanel(){
-        cardLayout.show(this, "RemoverPanel");
+
+    public NewGoalPanel getNewGoalPanel() {
+        return newGoalPanel;
     }
 
-
-    public NewGoalPanel getNgp() {
-        return ngp;
+    public TablePanel getTablePanel() {
+        return tablePanel;
     }
 }

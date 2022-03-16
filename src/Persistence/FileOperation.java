@@ -2,18 +2,19 @@ package Persistence;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import models.Reminder;
 
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class FileOperation {
-
     String path;
     Gson gson;
 
@@ -35,8 +36,21 @@ public class FileOperation {
         } catch (FileNotFoundException e) {
             System.out.println("Error en la escritura /FileWriter");
         }
-
     }
 
+    public ArrayList<Reminder> load() {
+        Reminder[] reminders = null;
+        try {
+            JsonReader reader = new JsonReader(new FileReader(path));
+            reminders = gson.fromJson(reader,Reminder[].class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
+        ArrayList<Reminder> remindersList = new ArrayList<>();
+        for (int i = 0; i < reminders.length; i++) {
+            remindersList.add(reminders[i]);
+        }
+        return remindersList;
+    }
 }

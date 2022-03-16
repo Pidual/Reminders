@@ -4,10 +4,12 @@ import Persistence.FileOperation;
 import models.Calendar;
 
 import views.GraphicalUserInterface;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
-public class Presenter implements ActionListener {
+public class Presenter implements ActionListener{
 
     private Calendar calendar;
     private GraphicalUserInterface view;
@@ -15,8 +17,19 @@ public class Presenter implements ActionListener {
 
     public Presenter() {
         calendar = new Calendar();
+        fileOperation = new FileOperation("data/Reminders_Data.json");
+        load();
         view = new GraphicalUserInterface(this);
-        fileOperation = new FileOperation("data/Reminders_Data2.json");
+
+    }
+
+    private void load() {
+        calendar.setReminders(fileOperation.load());
+    }
+
+    private void save() {
+        fileOperation.save(calendar.getReminders());
+
     }
 
     @Override
@@ -24,45 +37,25 @@ public class Presenter implements ActionListener {
         String command = event.getActionCommand();
         switch (command) {
             case "openNewGoalPanel":
-            view.showNewGoalPanel();
-            break;
-
-            case "removeGoal":
-            System.out.println("RECKT Dgoal alala");
-            view.showRemoveGoalPanel();
-            break;
-
-            case "modGoal":
-            System.out.println("MOD MOD");
-            break;
+                view.getCardsPanel().showNewGoalPanel();
+                break;
 
             case "configuration":
-            System.out.println("CONFIGS");
-            break;
-
-            case "exit":
-            System.out.println("EXEXE");
-            break;
+                view.getCardsPanel().showConfigPanel();
+                break;
 
             case "calendarGUI":
-                view.showCalendarPanel();
-            break;
+                view.getCardsPanel().getTablePanel().setDataAndReDrawTable(calendar.getReminders(), calendar.getReminderMatrix());
+                view.getCardsPanel().showTablePanel();
+                break;
 
             case "AddReminder":
                 calendar.addReminder(view.getInfo());
                 save();
                 break;
-
-            default:
-
+            case "exit":
+                System.exit(0);
                 break;
         }
     }
-
-    private void save() {
-        fileOperation.save(calendar.getReminders());
-
-
-    }
-
 }

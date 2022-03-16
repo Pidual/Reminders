@@ -15,11 +15,10 @@ import java.awt.GridBagConstraints;
 public class MainMenu extends JPanel {
 
     private JButton addGoalButton;
-    private JButton removeGoalButton;
-    private JButton modifyGoalButton;
     private JButton configurationButton;
     private JButton homeButton;
     private JButton exitButton;
+
 
     private ImageIcon lilIcon;
     private JLabel imageLabel;
@@ -30,6 +29,7 @@ public class MainMenu extends JPanel {
 
     private void initComponents(ActionListener listener) {
         this.setLayout(new GridBagLayout());
+        this.setBackground(new Color(0, 45, 89)); //Color del menu principal
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.weighty = 0.1;
         gbc.gridy = 0;
@@ -48,18 +48,6 @@ public class MainMenu extends JPanel {
         add(addGoalButton, gbc);
 
         gbc.gridy = 2;
-        removeGoalButton = new JButton("REMOVER META");
-        removeGoalButton.setActionCommand("removeGoal");
-        removeGoalButton.addActionListener(listener);
-        add(removeGoalButton, gbc);
-
-        gbc.gridy = 3;
-        modifyGoalButton = new JButton("MODIFICAR META");
-        modifyGoalButton.setActionCommand("modGoal");
-        modifyGoalButton.addActionListener(listener);
-        add(modifyGoalButton, gbc);
-
-        gbc.gridy = 4;
         homeButton = new JButton("CALENDARIO");
         homeButton.setActionCommand("calendarGUI");
         homeButton.addActionListener(listener);

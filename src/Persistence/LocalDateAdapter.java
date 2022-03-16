@@ -13,11 +13,15 @@ import java.time.format.DateTimeFormatter;
 /**
  * Es para serializar bien LocalDate por que saltaba error
  */
-class LocalDateAdapter implements JsonSerializer<LocalDate>{
+class LocalDateAdapter implements JsonSerializer<LocalDate> , JsonDeserializer<LocalDate>{
 
     public JsonElement serialize(LocalDate date, Type typeOfSrc, JsonSerializationContext context) {
         return new JsonPrimitive(date.format(DateTimeFormatter.ISO_LOCAL_DATE)); // "yyyy-mm-dd"
     }
 
 
+    @Override
+    public LocalDate deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+        return LocalDate.parse(jsonElement.getAsJsonPrimitive().getAsString());
+    }
 }
