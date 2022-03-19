@@ -1,14 +1,21 @@
 package runner;
-// import javax.swing.JFrame;
-// import javax.swing.UIManager;
-// import javax.swing.UnsupportedLookAndFeelException;
 
 import presenter.Presenter;
+import views.GraphicalUserInterface;
+
+import javax.swing.*;
 
 public class Run {
 
     public static void main(String[] args) {
-        Presenter presenter  = new Presenter();
 
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        JDialog.setDefaultLookAndFeelDecorated(true);
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        new Presenter();
     }
 }

@@ -1,6 +1,7 @@
 package views;
 
 import com.toedter.calendar.JDateChooser;
+import models.Reminder;
 
 import java.awt.*;
 import javax.swing.*;
@@ -8,8 +9,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static views.GraphicalUserInterface.*;
 
-public class NewGoalPanel extends JPanel {
+
+public class ManagerReminderPanel extends JPanel {
 
     private JLabel subjectLabel;
     private JTextField subject;
@@ -26,7 +29,6 @@ public class NewGoalPanel extends JPanel {
 
     private JLabel descriptionLabel;
     private JTextArea descripton;
-    private JSeparator separator;
     private JSeparator separatorTwo;
     private JButton submitButton;
     private Date actualDate;
@@ -35,16 +37,15 @@ public class NewGoalPanel extends JPanel {
     private JToggleButton highPrio;
     private ButtonGroup priorityGroup;
 
-    public NewGoalPanel(ActionListener listener) {
+    public ManagerReminderPanel(ActionListener listener) {
         actualDate = new Date();
+        this.setBackground(colorBackground);
         initComponents(listener);
-
     }
 
     private void initComponents(ActionListener listener) {
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        this.setBackground(new Color(152, 185, 171));
         priorityGroup = new ButtonGroup();
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(0, 30, 7, 0);
@@ -55,13 +56,13 @@ public class NewGoalPanel extends JPanel {
 
         gbc.gridy = 1;
         gbc.gridwidth = 3;
-        subject = new JTextField(30); //Textfield
+        subject = new JTextField(30);
         subject.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
-        subject.setForeground(Color.black);
+        subject.setForeground(colorFonts);
+        subject.setOpaque(false);
         styleComponent(subject);
         add(subject, gbc);
         gbc.gridwidth = 1;
-
 
         gbc.gridy = 2;
         gbc.gridx = 0;
@@ -75,16 +76,18 @@ public class NewGoalPanel extends JPanel {
         styleComponent(endTimeLabel);
         add(endTimeLabel, gbc);
 
-
         gbc.gridy = 2;
         gbc.gridx = 2;
         gbc.gridheight = 4;
-        submitButton = new JButton("<html>AGREGAR<br/>RECORDATORIO</html> "); //Submit button
+        submitButton = new JButton("<html>AGREGAR<br/>RECORDATORIO</html>"); //Submit button
         submitButton.setActionCommand("AddReminder");
         submitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         submitButton.addActionListener(listener);
         submitButton.setPreferredSize(new Dimension(200, 180));
-        styleButton(submitButton);
+        submitButton.setFont(new Font("Helvetica", Font.PLAIN, 20));
+        submitButton.setForeground(colorFonts);
+        submitButton.setBackground(colorButtons);
+        submitButton.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.WHITE));
         add(submitButton, gbc);
         gbc.gridheight = 1;
 
@@ -111,7 +114,6 @@ public class NewGoalPanel extends JPanel {
         add(startDateLabel, gbc);
 
 
-        gbc.gridy = 4;
         gbc.gridx = 1;
         endDateLabel = new JLabel("Fecha Final:");
         styleComponent(endDateLabel);
@@ -160,6 +162,7 @@ public class NewGoalPanel extends JPanel {
         gbc.gridx = 2;
         highPrio = new JToggleButton("Alta Prioridad");
         highPrio.setActionCommand("3");
+        highPrio.setOpaque(false);
         priorityGroup.add(highPrio);
         styleComponent(highPrio);
         add(highPrio, gbc);
@@ -177,22 +180,10 @@ public class NewGoalPanel extends JPanel {
         descripton = new JTextArea(3, 30);
         descripton.setPreferredSize(new Dimension(600, 200));
         descripton.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 1, Color.BLACK));
-        descripton.setForeground(Color.black);
+        descripton.setOpaque(false);
+        descripton.setForeground(colorFonts);
         styleComponent(descripton);
         add(descripton, gbc);
-    }
-
-    private void styleComponent(JComponent component) {
-        component.setFont(new Font("Helvetica", Font.PLAIN, 25));
-        component.setOpaque(false);
-    }
-
-    private void styleButton(JButton button) {
-        submitButton.setFont(new Font("Helvetica", Font.PLAIN, 20));
-        submitButton.setForeground(Color.WHITE);
-        submitButton.setBackground(new Color(0, 45, 89));
-        submitButton.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.WHITE
-        ));
     }
 
     public ArrayList<Object> getInfoInAnArray() {
@@ -207,4 +198,17 @@ public class NewGoalPanel extends JPanel {
         return information;
     }
 
+    public void setInformationForModding(Reminder reminder) {
+        subject.setText(reminder.getSubject());
+        descripton.setText(reminder.getDescription());
+        submitButton.setText("<html>MODIFICAR<br/>RECORDATORIO</html>");
+        submitButton.setActionCommand("MODIFY_REMINDER");
+    }
+
+    public void removeInformationForAdding() {
+        subject.setText("");
+        descripton.setText("");
+        submitButton.setText("<html>AGREGAR<br/>RECORDATORIO</html>");
+        submitButton.setActionCommand("ADD_REMINDER");
+    }
 }
